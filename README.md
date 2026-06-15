@@ -1,64 +1,291 @@
 # CogniTag NER Project
 
-This project connects the static frontend in `frontend` with the trained Hugging Face NER model stored in `backend`.
+CogniTag is a Machine Learning-based Named Entity Recognition (NER) system developed for Roman Urdu–English code-mixed text. The project utilizes a fine-tuned XLM-RoBERTa transformer model to identify and classify named entities such as Persons (PER), Locations (LOC), and Organizations (ORG) from informal code-mixed text commonly found on social media platforms and online communication.
 
-## What was added
+The system combines Natural Language Processing (NLP), Deep Learning, and Web Technologies to provide an interactive interface for entity extraction and analysis.
 
-- `backend/app.py` - Flask API that loads the local XLM-RoBERTa token classification model and serves predictions.
-- `backend/requirements.txt` - Python packages required by the backend.
-- `backend/run_backend.bat` - Windows helper script to create a virtual environment, install dependencies, and run Flask.
-- Updated `frontend/js/config.js` - points the frontend to `http://127.0.0.1:5000`.
-- Updated `frontend/js/api.js` - calls `/health` and `/analyze` and preserves backend error messages.
-- Updated `frontend/js/analyzer.js` - renders entity spans using backend character offsets for more accurate highlighting.
+---
 
-## Run the backend
+# Project Overview
 
-Option 1: Double-click this file:
+The primary focus of this project is the development and deployment of a transformer-based NER model capable of handling the linguistic challenges of Roman Urdu–English code-mixed text.
 
-`backend/run_backend.bat`
+The system consists of:
 
-Option 2: Run manually from the backend folder:
+* Machine Learning Model: Fine-tuned XLM-RoBERTa Token Classification Model
+* Backend: Flask REST API
+* Database: MongoDB
+* Authentication: Flask-Login Session Management
+* Frontend: HTML, CSS, JavaScript
 
-1. `python -m venv .venv`
-2. `.venv\Scripts\activate`
-3. `pip install -r requirements.txt`
-4. `python app.py`
+---
 
-The backend will run at:
+# Machine Learning Component
 
-`http://127.0.0.1:5000`
+The core of the project is a fine-tuned XLM-RoBERTa model trained for Named Entity Recognition.
 
-## Open the frontend
+## Model Architecture
 
-Open this file in your browser:
+* Base Model: XLM-RoBERTa
+* Task: Token Classification
+* Framework: Hugging Face Transformers
+* Deep Learning Library: PyTorch
+* Entity Classes:
 
-`frontend/pages/analyzer.html`
+  * PER (Person)
+  * LOC (Location)
+  * ORG (Organization)
 
-Type text and click **Run Extraction**. The frontend will send the text to Flask, Flask will load the model from `backend`, preprocess the text using the same inference style from your Colab notebook, run NER, and return entities to the frontend.
+## Training Pipeline
 
-## API endpoints
+The model was trained using:
 
-### Health check
+* CoNLL-style annotated dataset
+* BIO tagging scheme
+* Roman Urdu–English code-mixed text
+* Hugging Face Trainer API
+* Token-level classification approach
 
-`GET /health`
+## Inference Pipeline
 
-Returns model loading status.
+During prediction:
 
-### Analyze text
+1. Input text is normalized.
+2. Text is converted to lowercase.
+3. Sentence is tokenized using XLM-RoBERTa tokenizer.
+4. Tokens are aligned with original words.
+5. Model predicts entity labels.
+6. First-subtoken strategy is applied.
+7. Entity spans are reconstructed and returned.
 
-`POST /analyze`
+---
 
-Request body:
+# Features
 
-`{"text": "Ali Islamabad ja raha hai"}`
+## Machine Learning Features
 
-Response includes:
+* Transformer-based NER model
+* Roman Urdu–English code-mixed text support
+* Entity extraction and classification
+* Token-level predictions
+* Confidence score generation
+* Real-time inference
 
-- `processed_text`
-- `entities`
-- `tokens`
-- `model`
+## Application Features
 
-## Important accuracy note
+* User Registration
+* User Login
+* Session Management
+* Analysis History
+* User-specific Records
+* Entity Highlighting
+* JSON Export
+* Backend Health Monitoring
+* Responsive User Interface
 
-The backend now follows your Colab `predict_sentence()` inference style: lowercase the sentence, split by whitespace, tokenize with `is_split_into_words=True`, and keep the first subtoken prediction for each word. It also performs small safety cleanup first: unicode normalization, invisible-control-character removal, and whitespace cleanup.
+---
+
+# Project Structure
+
+```text
+CogniTag/
+│
+├── backend/
+│   ├── app.py
+│   ├── auth_routes.py
+│   ├── history_routes.py
+│   ├── feedback_routes.py
+│   ├── models.py
+│   ├── requirements.txt
+│   └── trained_model/
+│
+├── frontend/
+│   ├── pages/
+│   ├── js/
+│   ├── css/
+│   └── assets/
+│
+└── README.md
+```
+
+---
+
+# Technologies Used
+
+## Machine Learning
+
+* Python
+* PyTorch
+* Hugging Face Transformers
+* XLM-RoBERTa
+* NumPy
+* Pandas
+
+## Backend
+
+* Flask
+* Flask-CORS
+* Flask-Login
+* MongoDB
+* PyMongo
+
+## Frontend
+
+* HTML5
+* CSS3
+* JavaScript (ES6)
+
+---
+
+# Run the Backend
+
+## Option 1
+
+Double-click:
+
+```text
+backend/run_backend.bat
+```
+
+## Option 2
+
+Run manually:
+
+```bash
+python -m venv .venv
+```
+
+```bash
+.venv\Scripts\activate
+```
+
+```bash
+pip install -r requirements.txt
+```
+
+```bash
+python app.py
+```
+
+Backend URL:
+
+```text
+http://127.0.0.1:5000
+```
+
+---
+
+# Open the Frontend
+
+Open:
+
+```text
+frontend/pages/analyzer.html
+```
+
+Enter Roman Urdu–English text and click:
+
+```text
+Run Extraction
+```
+
+The frontend sends the input to the Flask backend, which loads the trained XLM-RoBERTa model, performs Named Entity Recognition, and returns prediction results.
+
+---
+
+# API Endpoints
+
+## Health Check
+
+```http
+GET /health
+```
+
+Returns model loading and server status.
+
+---
+
+## Analyze Text
+
+```http
+POST /api/analyze
+```
+
+Request:
+
+```json
+{
+  "text": "Ali Islamabad ja raha hai"
+}
+```
+
+Response:
+
+```json
+{
+  "processed_text": "...",
+  "entities": [...],
+  "tokens": [...],
+  "model": {...}
+}
+```
+
+---
+
+## Authentication APIs
+
+```http
+POST /api/auth/register
+POST /api/auth/login
+POST /api/auth/logout
+GET  /api/auth/me
+```
+
+---
+
+## History APIs
+
+```http
+GET    /api/history
+POST   /api/history
+DELETE /api/history/<id>
+POST   /api/history/clear
+```
+
+---
+
+# Database
+
+MongoDB is used to store:
+
+* User Accounts
+* Authentication Data
+* Analysis History
+* Feedback Records
+
+Each authenticated user maintains a separate analysis history.
+
+---
+
+# Important Accuracy Note
+
+The backend follows the same inference pipeline used during model development and evaluation.
+
+The preprocessing steps include:
+
+* Unicode normalization
+* Invisible character removal
+* Whitespace normalization
+* Lowercasing
+* Word-level tokenization
+* XLM-RoBERTa subword tokenization
+
+Predictions are generated using the first-subtoken strategy to maintain alignment between tokens and entity labels.
+
+---
+
+# Research Contribution
+
+This project addresses the challenge of Named Entity Recognition in Roman Urdu–English code-mixed text, a low-resource and linguistically complex domain. By leveraging transformer-based multilingual language models, the system improves entity recognition performance on informal text containing transliteration variations, spelling inconsistencies, and language mixing.
+
+The project demonstrates the practical deployment of a fine-tuned XLM-RoBERTa model within a complete web-based NLP application.

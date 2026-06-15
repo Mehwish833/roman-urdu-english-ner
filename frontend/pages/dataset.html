@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Dataset | CogniTag</title>
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        />
+        <link rel="stylesheet" href="../css/style.css" />
+    </head>
+    <body>
+        <div id="site-header"></div>
+
+        <main class="page-shell">
+            <section class="section">
+                <div class="container page-hero">
+                    <span class="eyebrow">Dataset profile</span>
+                    <h1 class="section-title">
+                        Code-mixed corpus designed for entity-rich informal text
+                    </h1>
+                    <p class="lead">
+                        CogniTag targets the challenging space of Roman Urdu +
+                        English code-mixed user text, where spelling variation,
+                        transliteration drift, and informal syntax make named
+                        entity recognition difficult.
+                    </p>
+                </div>
+            </section>
+
+            <section class="section">
+                <div class="container metric-grid">
+                    <article class="metric-card">
+                        <div class="muted small">Annotated sentences</div>
+                        <h3 class="gradient-text">4,348</h3>
+                        <p class="muted small">
+                            Entity-bearing conversational samples
+                        </p>
+                    </article>
+                    <article class="metric-card">
+                        <div class="muted small">Entity mentions</div>
+                        <h3 class="gradient-text">7,936</h3>
+                        <p class="muted small">PER, LOC, and ORG labels</p>
+                    </article>
+                    <article class="metric-card">
+                        <div class="muted small">Languages</div>
+                        <h3 class="gradient-text">2+</h3>
+                        <p class="muted small">
+                            Roman Urdu + English code-mixing
+                        </p>
+                    </article>
+                    <article class="metric-card">
+                        <div class="muted small">Annotation scheme</div>
+                        <h3 class="gradient-text">BIO</h3>
+                        <p class="muted small">
+                            Token-level named entity labels
+                        </p>
+                    </article>
+                </div>
+            </section>
+
+            <section class="section">
+                <div class="container two-col">
+                    <article class="info-card stack-lg">
+                        <span class="eyebrow">Label schema</span>
+                        <div id="entity-distribution" class="stack-lg">
+                            <div class="distribution-row">
+                                <div class="distribution-head">
+                                    <span>PER</span><span>4,374</span>
+                                </div>
+                                <div class="distribution-bar">
+                                    <span
+                                        class="distribution-fill per"
+                                        style="width: 100%"
+                                    ></span>
+                                </div>
+                            </div>
+                            <div class="distribution-row">
+                                <div class="distribution-head">
+                                    <span>LOC</span><span>2,152</span>
+                                </div>
+                                <div class="distribution-bar">
+                                    <span
+                                        class="distribution-fill loc"
+                                        style="width: 49%"
+                                    ></span>
+                                </div>
+                            </div>
+                            <div class="distribution-row">
+                                <div class="distribution-head">
+                                    <span>ORG</span><span>1,410</span>
+                                </div>
+                                <div class="distribution-bar">
+                                    <span
+                                        class="distribution-fill org"
+                                        style="width: 32%"
+                                    ></span>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="info-card stack-lg">
+                        <span class="eyebrow">Challenges</span>
+                        <ul class="list-clean">
+                            <li>
+                                <i class="fa-solid fa-language"></i>
+                                <div>
+                                    <strong>Transliteration variance</strong>
+                                    <div class="muted small">
+                                        The same Urdu word may appear in
+                                        multiple Roman spellings.
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <i class="fa-solid fa-comments"></i>
+                                <div>
+                                    <strong>Informal syntax</strong>
+                                    <div class="muted small">
+                                        Chat-like structure and social text
+                                        reduce the usefulness of rigid grammar
+                                        assumptions.
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <i class="fa-solid fa-font"></i>
+                                <div>
+                                    <strong>Mixed capitalization</strong>
+                                    <div class="muted small">
+                                        Many user-written sentences do not
+                                        preserve proper noun capitalization,
+                                        which affects entity cues.
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <i class="fa-solid fa-wand-magic-sparkles"></i>
+                                <div>
+                                    <strong>Entity ambiguity</strong>
+                                    <div class="muted small">
+                                        Names, organizations, and locations
+                                        often overlap in informal short
+                                        sentences.
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </article>
+                </div>
+            </section>
+
+            <section class="section">
+                <div class="container card-grid">
+                    <article class="doc-card stack-lg">
+                        <span class="eyebrow">Example sentence</span>
+                        <div class="showcase-box">
+                            <p>
+                                "ali kal karachi gaya tha aur microsoft ke
+                                office me interview diya"
+                            </p>
+                        </div>
+                        <div class="chip-row">
+                            <span class="chip tag-per">Ali → PER</span>
+                            <span class="chip tag-loc">Karachi → LOC</span>
+                            <span class="chip tag-org">Microsoft → ORG</span>
+                        </div>
+                    </article>
+                    <article class="doc-card stack-lg">
+                        <span class="eyebrow">Training implication</span>
+                        <p class="muted">
+                            Because the task is code-mixed and informal, a
+                            multilingual transformer like XLM-R is a better
+                            deployment match than handcrafted pipelines. Your
+                            current frontend/backend design reflects that
+                            stronger research story.
+                        </p>
+                    </article>
+                </div>
+            </section>
+        </main>
+
+        <div id="site-footer"></div>
+
+        <script src="../js/config.js"></script>
+        <script src="../js/storage.js"></script>
+        <script src="../js/api.js"></script>
+        <script src="../js/common.js"></script>
+    </body>
+</html>

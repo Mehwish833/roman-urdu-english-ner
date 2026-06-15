@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Dashboard | CogniTag</title>
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        />
+        <link rel="stylesheet" href="../css/style.css" />
+    </head>
+    <body>
+        <div id="site-header"></div>
+
+        <main class="page-shell">
+            <section class="section">
+                <div class="container page-hero">
+                    <span class="eyebrow">Research dashboard</span>
+                    <h1 class="section-title">
+                        Saved inference analytics and operational status
+                    </h1>
+                    <p class="lead">
+                        The dashboard summarizes what has been analyzed in this
+                        browser session and shows whether the Flask backend is
+                        currently available.
+                    </p>
+                </div>
+            </section>
+
+            <section class="section">
+                <div class="container metric-grid">
+                    <article class="metric-card">
+                        <div class="muted small">Active user</div>
+                        <h3 id="dashboard-user-name">Guest researcher</h3>
+                        <p class="muted small">Frontend session identity</p>
+                    </article>
+                    <article class="metric-card">
+                        <div class="muted small">Saved analyses</div>
+                        <h3 id="metric-analyses">0</h3>
+                        <p class="muted small">Stored result records</p>
+                    </article>
+                    <article class="metric-card">
+                        <div class="muted small">Extracted entities</div>
+                        <h3 id="metric-entities">0</h3>
+                        <p class="muted small">Across saved runs</p>
+                    </article>
+                    <article class="metric-card">
+                        <div class="muted small">Predicted tokens</div>
+                        <h3 id="metric-tokens">0</h3>
+                        <p class="muted small">Token-level output count</p>
+                    </article>
+                </div>
+            </section>
+
+            <section class="section">
+                <div class="container dashboard-layout">
+                    <article class="info-card stack-lg">
+                        <div class="justify-between">
+                            <div>
+                                <span class="eyebrow">System health</span>
+                                <h2
+                                    class="section-title"
+                                    style="font-size: 1.8rem"
+                                >
+                                    Backend connectivity
+                                </h2>
+                            </div>
+                            <div
+                                class="status-pill"
+                                id="dashboard-backend-status"
+                            >
+                                <span
+                                    class="status-dot status-dot-offline"
+                                ></span>
+                                <span>Checking API</span>
+                            </div>
+                        </div>
+                        <p class="muted">
+                            If the backend is offline, the website still loads,
+                            but the live model inference in the analyzer page
+                            will not work until Flask is running.
+                        </p>
+                        <div class="code-box">
+                            <p>
+                                <strong>Expected endpoint:</strong>
+                                <code>http://127.0.0.1:5000/health</code>
+                            </p>
+                        </div>
+                    </article>
+
+                    <article class="info-card stack-lg">
+                        <div class="justify-between">
+                            <div>
+                                <span class="eyebrow">Entity distribution</span>
+                                <h2
+                                    class="section-title"
+                                    style="font-size: 1.8rem"
+                                >
+                                    Saved history summary
+                                </h2>
+                            </div>
+                            <button
+                                type="button"
+                                class="btn btn-secondary"
+                                id="clear-history-btn"
+                            >
+                                Clear history
+                            </button>
+                        </div>
+                        <div id="entity-distribution" class="stack-lg"></div>
+                    </article>
+                </div>
+            </section>
+
+            <section class="section">
+                <div class="container">
+                    <article class="table-card stack-lg">
+                        <div class="justify-between">
+                            <div>
+                                <span class="eyebrow">Recent records</span>
+                                <h2
+                                    class="section-title"
+                                    style="font-size: 1.8rem"
+                                >
+                                    Latest saved analyses
+                                </h2>
+                            </div>
+                            <a class="btn btn-primary" href="analyzer.html"
+                                >Run new analysis</a
+                            >
+                        </div>
+                        <div
+                            id="recent-history-list"
+                            class="history-list"
+                        ></div>
+                    </article>
+                </div>
+            </section>
+        </main>
+
+        <div id="site-footer"></div>
+
+        <script src="../js/config.js"></script>
+        <script src="../js/storage.js"></script>
+        <script src="../js/api.js"></script>
+        <script src="../js/common.js"></script>
+        <script src="../js/dashboard.js"></script>
+    </body>
+</html>

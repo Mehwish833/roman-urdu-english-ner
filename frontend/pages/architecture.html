@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Architecture | CogniTag</title>
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        />
+        <link rel="stylesheet" href="../css/style.css" />
+    </head>
+    <body>
+        <div id="site-header"></div>
+
+        <main class="page-shell">
+            <section class="section">
+                <div class="container page-hero">
+                    <span class="eyebrow">System design</span>
+                    <h1 class="section-title">
+                        End-to-end architecture for local research inference
+                    </h1>
+                    <p class="lead">
+                        This project now reflects your actual deployment stack:
+                        a browser frontend, Flask inference API, and a
+                        fine-tuned XLM-RoBERTa token classification model stored
+                        in the backend folder.
+                    </p>
+                </div>
+            </section>
+
+            <section class="section">
+                <div class="container feature-grid">
+                    <article class="feature-card">
+                        <h3>
+                            <i class="fa-solid fa-window-maximize"></i> Frontend
+                            interface
+                        </h3>
+                        <p class="muted">
+                            Multi-page website built with HTML, CSS, and
+                            JavaScript. Includes login state, dashboard
+                            analytics, documentation, contact form, and an
+                            analysis workspace.
+                        </p>
+                    </article>
+                    <article class="feature-card">
+                        <h3>
+                            <i class="fa-solid fa-server"></i> Flask API layer
+                        </h3>
+                        <p class="muted">
+                            Loads the tokenizer and model from `backend`,
+                            performs inference, exposes `/health` and
+                            `/analyze`, and returns word-level entities aligned
+                            with your notebook logic.
+                        </p>
+                    </article>
+                    <article class="feature-card">
+                        <h3>
+                            <i class="fa-solid fa-brain"></i> XLM-R inference
+                            core
+                        </h3>
+                        <p class="muted">
+                            `XLMRobertaForTokenClassification` predicts BIO
+                            labels for code-mixed Roman Urdu + English text,
+                            then the backend merges them into clean entity
+                            spans.
+                        </p>
+                    </article>
+                </div>
+            </section>
+
+            <section class="section">
+                <div class="container two-col">
+                    <article class="info-card stack-lg">
+                        <span class="eyebrow">Inference pipeline</span>
+                        <div class="timeline">
+                            <div class="timeline-item">
+                                <div class="timeline-index">1</div>
+                                <div>
+                                    <h3>Client request</h3>
+                                    <p class="muted">
+                                        The analyzer page submits raw text
+                                        through `frontend/js/api.js` to `POST
+                                        /analyze`.
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-index">2</div>
+                                <div>
+                                    <h3>Colab-aligned preprocessing</h3>
+                                    <p class="muted">
+                                        Flask normalizes the text, lowercases
+                                        it, splits by whitespace, and tokenizes
+                                        with `is_split_into_words=True` to match
+                                        your notebook prediction style.
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-index">3</div>
+                                <div>
+                                    <h3>First-subtoken prediction</h3>
+                                    <p class="muted">
+                                        Only the first subtoken prediction per
+                                        word is kept, just like your Colab
+                                        `predict_sentence()` implementation.
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-index">4</div>
+                                <div>
+                                    <h3>Frontend presentation</h3>
+                                    <p class="muted">
+                                        The UI highlights entities, renders
+                                        token scores, and stores the result in
+                                        session-aware local history.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="info-card stack-lg">
+                        <span class="eyebrow">Persistence design</span>
+                        <h2 class="section-title" style="font-size: 2rem">
+                            Ready for auth and database history
+                        </h2>
+                        <p class="lead">
+                            The current frontend already has the user flows
+                            needed for a production-like system. Today, those
+                            flows are stored in browser local storage. Later,
+                            you can connect them to real backend endpoints and a
+                            database.
+                        </p>
+                        <ul class="list-clean">
+                            <li>
+                                <i class="fa-solid fa-user-lock"></i>
+                                <div>
+                                    <strong>Login session</strong>
+                                    <div class="muted small">
+                                        A reusable login modal stores user
+                                        identity and role across pages.
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <i class="fa-solid fa-clock-rotate-left"></i>
+                                <div>
+                                    <strong>Result history</strong>
+                                    <div class="muted small">
+                                        Each analysis is saved per active
+                                        session, then surfaced inside the
+                                        analyzer sidebar and dashboard page.
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <i class="fa-solid fa-database"></i>
+                                <div>
+                                    <strong>Database migration path</strong>
+                                    <div class="muted small">
+                                        Replace local storage with backend
+                                        routes for register/login/history
+                                        without redesigning the frontend.
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                        <div class="code-box">
+                            <p>
+                                <strong
+                                    >Suggested future backend
+                                    extensions:</strong
+                                >
+                            </p>
+                            <p class="muted small" style="margin-top: 0.5rem">
+                                <code>POST /auth/login</code>,
+                                <code>POST /auth/register</code>,
+                                <code>GET /history</code>,
+                                <code>POST /history</code>
+                            </p>
+                        </div>
+                    </article>
+                </div>
+            </section>
+        </main>
+
+        <div id="site-footer"></div>
+
+        <script src="../js/config.js"></script>
+        <script src="../js/storage.js"></script>
+        <script src="../js/api.js"></script>
+        <script src="../js/common.js"></script>
+    </body>
+</html>

@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Contact | CogniTag</title>
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        />
+        <link rel="stylesheet" href="../css/style.css" />
+    </head>
+    <body>
+        <div id="site-header"></div>
+
+        <main class="page-shell">
+            <section class="section">
+                <div class="container page-hero">
+                    <span class="eyebrow">Collaboration</span>
+                    <h1 class="section-title">Contact the research team</h1>
+                    <p class="lead">
+                        Use this page for research supervision, collaboration
+                        requests, demo questions, or future deployment planning.
+                        The form currently stores messages locally and is ready
+                        for database-backed submission later.
+                    </p>
+                </div>
+            </section>
+
+            <section class="section">
+                <div class="container contact-grid">
+                    <article class="contact-card stack-lg">
+                        <h2 class="section-title" style="font-size: 1.9rem">
+                            Project contact points
+                        </h2>
+                        <ul class="list-clean">
+                            <li>
+                                <i class="fa-solid fa-envelope"></i>
+                                <div>
+                                    <strong>Email</strong>
+                                    <div class="muted small">
+                                        mehwishfariad833@gmail.com
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <i class="fa-solid fa-location-dot"></i>
+                                <div>
+                                    <strong>Location</strong>
+                                    <div class="muted small">
+                                        Vehari, Pakistan
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <i class="fa-brands fa-github"></i>
+                                <div>
+                                    <strong>Repository</strong>
+                                    <div class="muted small">
+
+                                        frontend and Flask backend.
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                        <div class="code-box">
+                            <p class="muted">
+                                Suggested future improvement: connect with cloud database now connected to local database
+                                <code>POST /contact</code> and store submissions
+                                in your project database.
+                            </p>
+                        </div>
+                    </article>
+
+                    <article class="contact-card stack-lg">
+                        <h2 class="section-title" style="font-size: 1.9rem">
+                            Send a message
+                        </h2>
+                        <form id="contact-form" class="form-stack">
+                            <label class="field-label" for="contact-name"
+                                >Full name</label
+                            >
+                            <input
+                                class="form-control"
+                                id="contact-name"
+                                name="name"
+                                placeholder="Enter your name"
+                                required
+                            />
+                            <label class="field-label" for="contact-email"
+                                >Email</label
+                            >
+                            <input
+                                class="form-control"
+                                id="contact-email"
+                                name="email"
+                                type="email"
+                                placeholder="Enter your email"
+                                required
+                            />
+                            <label
+                                class="field-label"
+                                for="contact-organization"
+                                >Organization</label
+                            >
+                            <input
+                                class="form-control"
+                                id="contact-organization"
+                                name="organization"
+                                placeholder="University, lab, company, or department"
+                            />
+                            <label class="field-label" for="contact-message"
+                                >Message</label
+                            >
+                            <textarea
+                                class="textarea-input"
+                                id="contact-message"
+                                name="message"
+                                placeholder="Write your message"
+                                required
+                            ></textarea>
+                            <button
+                                type="submit"
+                                class="btn btn-primary btn-block"
+                            >
+                                <i class="fa-solid fa-paper-plane"></i> Save
+                                message
+                            </button>
+                        </form>
+                        <div id="contact-success" class="status-pill" hidden>
+                            <span class="status-dot status-dot-online"></span>
+                            <span
+                                >Message saved locally. Ready for globally saving later.</span
+                            >
+                        </div>
+                    </article>
+                </div>
+            </section>
+        </main>
+
+        <div id="site-footer"></div>
+
+        <script src="../js/config.js"></script>
+        <script src="../js/storage.js"></script>
+        <script src="../js/api.js"></script>
+        <script src="../js/common.js"></script>
+        <script src="../js/contact.js"></script>
+    </body>
+</html>

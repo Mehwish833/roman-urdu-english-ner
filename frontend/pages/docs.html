@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Docs | CogniTag</title>
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        />
+        <link rel="stylesheet" href="../css/style.css" />
+    </head>
+    <body>
+        <div id="site-header"></div>
+
+        <main class="page-shell">
+            <section class="section">
+                <div class="container docs-layout">
+                    <aside class="doc-nav glass-panel">
+                        <a href="#overview">Overview</a>
+                        <a href="#run">Run the project</a>
+                        <a href="#api">API</a>
+                        <a href="#frontend">Frontend features</a>
+                        <a href="#future">Future database integration</a>
+                    </aside>
+
+                    <div class="stack-lg">
+                        <section
+                            class="doc-section doc-card stack-lg"
+                            id="overview"
+                        >
+                            <span class="eyebrow">Documentation</span>
+                            <h1 class="section-title">
+                                CogniTag project guide
+                            </h1>
+                            <p class="lead">
+                                CogniTag is a browser-based research interface
+                                for testing a local code-mixed NER model. It
+                                combines a Flask backend with a static frontend
+                                that runs well in VS Code using a simple local
+                                server.
+                            </p>
+                        </section>
+
+                        <section class="doc-section doc-card stack-lg" id="run">
+                            <span class="eyebrow">Run the project</span>
+                            <h2 class="section-title" style="font-size: 2rem">
+                                Daily startup steps
+                            </h2>
+                            <div class="code-box stack-lg">
+                                <p><strong>Terminal 1 (backend)</strong></p>
+                                <p><code>cd backend</code></p>
+                                <p><code>.\run_backend.bat</code></p>
+                                <p><strong>Terminal 2 (frontend)</strong></p>
+                                <p><code>cd frontend</code></p>
+                                <p><code>python -m http.server 8000</code></p>
+                                <p><strong>Open browser</strong></p>
+                                <p><code>http://127.0.0.1:8000/</code></p>
+                            </div>
+                        </section>
+
+                        <section class="doc-section doc-card stack-lg" id="api">
+                            <span class="eyebrow">API</span>
+                            <h2 class="section-title" style="font-size: 2rem">
+                                Current backend endpoints
+                            </h2>
+                            <ul class="list-clean">
+                                <li>
+                                    <i class="fa-solid fa-heart-pulse"></i>
+                                    <div>
+                                        <strong>GET /health</strong>
+                                        <div class="muted small">
+                                            Checks whether Flask is up and the
+                                            model can be loaded.
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <i
+                                        class="fa-solid fa-wand-magic-sparkles"
+                                    ></i>
+                                    <div>
+                                        <strong>POST /analyze</strong>
+                                        <div class="muted small">
+                                            Accepts `{ "text": "..." }` and
+                                            returns processed text, entity
+                                            spans, token-level predictions, and
+                                            model metadata.
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </section>
+
+                        <section
+                            class="doc-section doc-card stack-lg"
+                            id="frontend"
+                        >
+                            <span class="eyebrow">Frontend</span>
+                            <h2 class="section-title" style="font-size: 2rem">
+                                What is functional right now
+                            </h2>
+                            <ul class="list-clean">
+                                <li>
+                                    <i class="fa-solid fa-user"></i>
+                                    <div>
+                                        <strong>Session login UI</strong>
+                                        <div class="muted small">
+                                            Users can save a name, email, and
+                                            role into browser storage and carry
+                                            that identity across pages.
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <i class="fa-solid fa-clock"></i>
+                                    <div>
+                                        <strong>Result history</strong>
+                                        <div class="muted small">
+                                            Every analysis is stored locally and
+                                            appears in the analyzer sidebar and
+                                            dashboard page.
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <i class="fa-solid fa-file-export"></i>
+                                    <div>
+                                        <strong>Result export</strong>
+                                        <div class="muted small">
+                                            Analyzed outputs can be exported to
+                                            JSON for reporting or debugging.
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </section>
+
+                        <section
+                            class="doc-section doc-card stack-lg"
+                            id="future"
+                        >
+                            <span class="eyebrow">Next phase</span>
+                            <h2 class="section-title" style="font-size: 2rem">
+                                How to connect login and history to a cloud database
+                                later
+                            </h2>
+                            <p class="lead">
+                                The site is already structured for that upgrade.
+                                Replace the browser-only storage calls with
+                                backend API calls and persist them in global cloud databases
+                                like SQLite, PostgreSQL, or MongoDB.
+                            </p>
+                            <div class="code-box">
+                                <p><code>POST /auth/register</code></p>
+                                <p><code>POST /auth/login</code></p>
+                                <p><code>GET /history</code></p>
+                                <p><code>POST /history</code></p>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <div id="site-footer"></div>
+
+        <script src="../js/config.js"></script>
+        <script src="../js/storage.js"></script>
+        <script src="../js/api.js"></script>
+        <script src="../js/common.js"></script>
+    </body>
+</html>

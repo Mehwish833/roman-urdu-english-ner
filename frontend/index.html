@@ -1,0 +1,329 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>CogniTag | Research-grade Code-Mixed NER</title>
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        />
+        <link rel="stylesheet" href="css/style.css" />
+    </head>
+    <body>
+        <div id="site-header"></div>
+
+        <main class="page-shell">
+            <section class="section">
+                <div class="container hero-grid">
+                    <div class="stack-lg">
+                        <span class="eyebrow"
+                            ><i class="fa-solid fa-flask"></i> Final year
+                            research platform</span
+                        >
+                        <h1 class="hero-title">
+                            Professional NER interface for
+                            <span class="gradient-text"
+                                >Roman Urdu + English</span
+                            >
+                            code-mixed text
+                        </h1>
+                        <p class="lead">
+                            CogniTag turns your trained XLM-RoBERTa model into a
+                            polished research website with live inference,
+                            reproducible preprocessing, session-aware history,
+                            and a dashboard that tracks extracted entities.
+                        </p>
+                        <div class="inline-actions">
+                            <a
+                                class="btn btn-primary"
+                                href="pages/analyzer.html"
+                                ><i class="fa-solid fa-sparkles"></i> Launch
+                                live demo</a
+                            >
+                            <a class="btn btn-secondary" href="pages/docs.html"
+                                ><i class="fa-solid fa-book-open"></i> Read
+                                documentation</a
+                            >
+                        </div>
+                        <div class="hero-metrics">
+                            <div class="hero-metric">
+                                <strong>XLM-R</strong>
+                                <span class="muted">token classification</span>
+                            </div>
+                            <div class="hero-metric">
+                                <strong>Flask API</strong>
+                                <span class="muted">local model serving</span>
+                            </div>
+                            <div class="hero-metric">
+                                <strong>PER · LOC · ORG</strong>
+                                <span class="muted"
+                                    >research entity classes</span
+                                >
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="glass-panel stack-lg">
+                        <div class="justify-between">
+                            <div>
+                                <div
+                                    class="section-title"
+                                    style="font-size: 1.65rem"
+                                >
+                                    Research preview
+                                </div>
+                                <p class="muted small">
+                                    Designed for demonstration, evaluation, and
+                                    future database integration.
+                                </p>
+                            </div>
+                            <span class="status-pill"
+                                ><span
+                                    class="status-dot status-dot-online"
+                                ></span
+                                >Production-style UI</span
+                            >
+                        </div>
+                        <div class="showcase-box">
+                            <div class="small muted">Sample query</div>
+                            <p style="margin-top: 0.75rem; font-size: 1.05rem">
+                                "Sara Microsoft me internship kr rhi hai aur kal
+                                Lahore travel karegi"
+                            </p>
+                        </div>
+                        <div class="chip-row">
+                            <span class="chip tag-per"
+                                ><i class="fa-solid fa-user"></i> Sara →
+                                PER</span
+                            >
+                            <span class="chip tag-org"
+                                ><i class="fa-solid fa-building"></i> Microsoft
+                                → ORG</span
+                            >
+                            <span class="chip tag-loc"
+                                ><i class="fa-solid fa-location-dot"></i> Lahore
+                                → LOC</span
+                            >
+                        </div>
+                        <ul class="list-clean">
+                            <li>
+                                <i class="fa-solid fa-check"></i>
+                                <div>
+                                    <strong>Colab-aligned inference</strong>
+                                    <div class="muted small">
+                                        Lowercasing + whitespace split +
+                                        first-subtoken prediction logic.
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <i class="fa-solid fa-check"></i>
+                                <div>
+                                    <strong>Session login + history</strong>
+                                    <div class="muted small">
+                                        User sessions and saved analyses are
+                                        already wired in the frontend.
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <i class="fa-solid fa-check"></i>
+                                <div>
+                                    <strong>Database-ready UX</strong>
+                                    <div class="muted small">
+                                        You can later connect auth and history
+                                        to backend/database endpoints without
+                                        redesigning the site.
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section">
+                <div class="container stack-lg">
+                    <div class="page-hero">
+                        <span class="eyebrow">Research contributions</span>
+                        <h2 class="section-title">
+                            Built for evaluation, presentation, and future
+                            productization
+                        </h2>
+                        <p class="lead">
+                            The frontend now behaves like a real research portal
+                            instead of a static demo: users can sign in, run
+                            analyses, inspect token-level outputs, and revisit
+                            previous runs.
+                        </p>
+                    </div>
+                    <div class="feature-grid">
+                        <article class="feature-card">
+                            <h3>Live inference workspace</h3>
+                            <p class="muted">
+                                Professional analyzer page with sample prompts,
+                                preprocessing stages, entity highlighting,
+                                confidence scores, token table, and exportable
+                                JSON results.
+                            </p>
+                        </article>
+                        <article class="feature-card">
+                            <h3>Result history and dashboard</h3>
+                            <p class="muted">
+                                Every analysis is saved to browser storage per
+                                signed-in session, then summarized inside a
+                                dashboard with counts, recent runs, and entity
+                                distribution.
+                            </p>
+                        </article>
+                        <article class="feature-card">
+                            <h3>Research documentation</h3>
+                            <p class="muted">
+                                Architecture, dataset, docs, and collaboration
+                                pages are now consistent, cleaner, and aligned
+                                with your actual XLM-R + Flask deployment flow.
+                            </p>
+                        </article>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section">
+                <div class="container two-col">
+                    <article class="info-card stack-lg">
+                        <span class="eyebrow">Workflow</span>
+                        <h2 class="section-title" style="font-size: 2rem">
+                            From raw sentence to labeled entities
+                        </h2>
+                        <div class="timeline">
+                            <div class="timeline-item">
+                                <div class="timeline-index">01</div>
+                                <div>
+                                    <h3>Input and preprocessing</h3>
+                                    <p class="muted">
+                                        The UI sends text to Flask, which
+                                        mirrors your Colab inference path:
+                                        normalize, lowercase, split words,
+                                        tokenize with
+                                        `is_split_into_words=True`.
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-index">02</div>
+                                <div>
+                                    <h3>Model prediction</h3>
+                                    <p class="muted">
+                                        The saved model is loaded from the
+                                        backend folder and returns
+                                        first-subtoken word-level predictions
+                                        with BIO labels.
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-index">03</div>
+                                <div>
+                                    <h3>Presentation and storage</h3>
+                                    <p class="muted">
+                                        Frontend renders highlighted entities, a
+                                        token table, and saves the full run for
+                                        dashboards, exports, and future
+                                        user-specific persistence.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="info-card stack-lg">
+                        <span class="eyebrow">Why this frontend matters</span>
+                        <h2 class="section-title" style="font-size: 2rem">
+                            A stronger project presentation
+                        </h2>
+                        <ul class="list-clean">
+                            <li>
+                                <i class="fa-solid fa-chart-line"></i>
+                                <div>
+                                    <strong
+                                        >Professional portfolio value</strong
+                                    >
+                                    <div class="muted small">
+                                        Useful for FYP defense, supervisor
+                                        review, and internship or job showcases.
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <i class="fa-solid fa-database"></i>
+                                <div>
+                                    <strong
+                                        >Ready for database integration</strong
+                                    >
+                                    <div class="muted small">
+                                        The login/history UX is already in
+                                        place; only backend persistence
+                                        endpoints are needed later.
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <i class="fa-solid fa-laptop-code"></i>
+                                <div>
+                                    <strong>Easy to maintain</strong>
+                                    <div class="muted small">
+                                        Vanilla HTML/CSS/JS keeps your project
+                                        lightweight and easy to run from VS
+                                        Code.
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                        <div class="code-box">
+                            <div class="small muted">
+                                Current backend endpoint
+                            </div>
+                            <p style="margin-top: 0.5rem">
+                                <code>POST /analyze</code> returns processed
+                                text, entity spans, token predictions, and model
+                                metadata.
+                            </p>
+                        </div>
+                    </article>
+                </div>
+            </section>
+
+            <section class="section">
+                <div class="container glass-panel justify-between">
+                    <div>
+                        <span class="eyebrow">Next step</span>
+                        <h2 class="section-title" style="font-size: 2rem">
+                            Open the full website and start from the homepage
+                        </h2>
+                        <p class="lead">
+                            Use the navigation to explore the project, then go
+                            into the Live Demo to test the model and populate
+                            your dashboard.
+                        </p>
+                    </div>
+                    <div class="inline-actions">
+                        <a class="btn btn-primary" href="pages/analyzer.html"
+                            >Open analyzer</a
+                        >
+                        <a class="btn btn-secondary" href="pages/dashboard.html"
+                            >View dashboard</a
+                        >
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <div id="site-footer"></div>
+
+        <script src="js/config.js"></script>
+        <script src="js/storage.js"></script>
+        <script src="js/api.js"></script>
+        <script src="js/common.js"></script>
+    </body>
+</html>

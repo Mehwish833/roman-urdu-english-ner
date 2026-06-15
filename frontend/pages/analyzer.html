@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Live Demo | CogniTag</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link rel="stylesheet" href="../css/style.css" />
+</head>
+
+<body>
+    <div id="site-header"></div>
+
+    <main class="page-shell">
+        <section class="section">
+            <div class="container page-hero">
+                <span class="eyebrow">Live inference workspace</span>
+                <h1 class="section-title">
+                    Run the model, inspect outputs, and save result history
+                </h1>
+                <p class="lead">
+                    This page is aligned with your Colab inference flow and
+                    exposes the most useful outputs for a research project:
+                    processed text, highlighted entities, token labels,
+                    confidence scores, JSON export, and reusable history.
+                </p>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="container analyzer-layout">
+                <div class="stack-lg">
+                    <article class="glass-panel stack-lg">
+                        <div class="justify-between">
+                            <div>
+                                <h2 class="section-title" style="font-size: 1.8rem">
+                                    Input text
+                                </h2>
+                                <p class="muted small">
+                                    Use mixed Roman Urdu and English
+                                    sentences just like your training and
+                                    Colab evaluation examples.
+                                </p>
+                            </div>
+                            <div class="char-counter" id="char-count">
+                                0 / 1000 characters
+                            </div>
+                        </div>
+
+                        <div class="sample-row">
+                            <button type="button" class="sample-chip" data-sample="Ali kal Karachi gaya tha">
+                                Ali kal Karachi gaya tha
+                            </button>
+                            <button type="button" class="sample-chip" data-sample="Ahmed works at Google">
+                                Ahmed works at Google
+                            </button>
+                            <button type="button" class="sample-chip" data-sample="Sara Microsoft me job krti hai">
+                                Sara Microsoft me job krti hai
+                            </button>
+                        </div>
+
+                        <textarea id="ner-input" class="textarea-input"
+                            placeholder="Type or paste your text here..."></textarea>
+
+                        <div class="panel-actions">
+                            <button type="button" class="btn btn-primary" id="analyze-btn">
+                                <i class="fa-solid fa-sparkles"></i> Run
+                                extraction
+                            </button>
+                            <button type="button" class="btn btn-secondary" id="clear-btn">
+                                Clear
+                            </button>
+                            <button type="button" class="btn btn-ghost" id="export-json-btn">
+                                Export JSON
+                            </button>
+                        </div>
+                    </article>
+
+                    <article class="glass-panel stack-lg">
+                        <div>
+                            <span class="eyebrow">Preprocessing</span>
+                            <h2 class="section-title" style="font-size: 1.8rem">
+                                Colab-style inference stages
+                            </h2>
+                        </div>
+                        <div class="prep-grid">
+                            <div class="prep-step" id="step-1">
+                                <div class="prep-step-number">1</div>
+                                <div>
+                                    <h3>Normalize and lowercase</h3>
+                                    <p class="muted small">
+                                        The backend applies safe cleanup and
+                                        lowercasing to stay aligned with
+                                        your notebook inference path.
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="prep-step" id="step-2">
+                                <div class="prep-step-number">2</div>
+                                <div>
+                                    <h3>Whitespace split</h3>
+                                    <p class="muted small">
+                                        Words are split the same way your
+                                        Colab function used
+                                        `sentence.split()`.
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="prep-step" id="step-3">
+                                <div class="prep-step-number">3</div>
+                                <div>
+                                    <h3>XLM-R token classification</h3>
+                                    <p class="muted small">
+                                        Only the first subtoken prediction
+                                        per word is kept, matching your
+                                        notebook implementation.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="glass-panel stack-lg">
+                        <div>
+                            <span class="eyebrow">Processed text</span>
+                            <div class="processed-box" id="processed-text">
+                                Processed text will appear here after
+                                analysis.
+                            </div>
+                        </div>
+                        <div>
+                            <span class="eyebrow">Highlighted result</span>
+                            <div class="output-panel" id="output-area"></div>
+                        </div>
+                    </article>
+
+                    <div class="two-col">
+                        <article class="table-card stack-lg">
+                            <div>
+                                <span class="eyebrow">Entity cards</span>
+                                <h2 class="section-title" style="font-size: 1.6rem">
+                                    Detected entities
+                                </h2>
+                            </div>
+                            <div class="entity-list" id="entity-list"></div>
+                        </article>
+
+                        <article class="table-card stack-lg">
+                            <div>
+                                <span class="eyebrow">Token output</span>
+                                <h2 class="section-title" style="font-size: 1.6rem">
+                                    Word-level predictions
+                                </h2>
+                            </div>
+                            <div class="table-wrap">
+                                <table class="data-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Word</th>
+                                            <th>Label</th>
+                                            <th>Span</th>
+                                            <th>Score</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="token-table-body"></tbody>
+                                </table>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+
+                <aside class="stack-lg">
+                    <article class="sticky-card stack-lg">
+                        <span class="eyebrow">Workspace status</span>
+                        <div class="status-pill" id="analyzer-backend-status">
+                            <span class="status-dot status-dot-offline"></span>
+                            <span>Checking backend</span>
+                        </div>
+                        <div class="code-box">
+                            <div class="small muted">Current user</div>
+                            <p id="analyzer-user-label" style="margin-top: 0.5rem"></p>
+                        </div>
+                    </article>
+
+                    <article class="sticky-card stack-lg">
+                        <div class="justify-between">
+                            <div>
+                                <span class="eyebrow">Saved runs</span>
+                                <h2 class="section-title" style="font-size: 1.5rem">
+                                    Result history
+                                </h2>
+                            </div>
+                            <button type="button" class="btn btn-secondary" id="clear-analyzer-history">
+                                Clear
+                            </button>
+                        </div>
+                        <div class="history-list" id="history-list"></div>
+                    </article>
+                </aside>
+            </div>
+        </section>
+    </main>
+
+    <div id="site-footer"></div>
+
+    <script src="../js/config.js"></script>
+    <script src="../js/api.js"></script>
+    <script src="../js/storage.js"></script>
+    <script src="../js/common.js"></script>
+    <script src="../js/analyzer.js"></script>
+</body>
+
+</html>
